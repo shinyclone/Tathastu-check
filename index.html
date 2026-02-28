@@ -3,584 +3,1028 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tathastu | Leisure meets Luxury</title>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<title>Tathastu – Leisure meets Luxury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #0a0f0a;
+    --bg2: #111811;
+    --card: #141c14;
+    --card2: #1a231a;
+    --green: #4ade80;
+    --green2: #22c55e;
+    --green-dim: #16a34a;
+    --text: #f0faf0;
+    --text2: #a8c8a8;
+    --border: #1f2f1f;
+    --gold: #d4af6a;
+    --danger: #f87171;
+    --radius: 14px;
+    --shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
 
-/* =============================
-   GLOBAL STYLES
-============================= */
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+  html { scroll-behavior: smooth; }
 
-body {
-  background: linear-gradient(rgba(240,248,240,0.9), rgba(240,248,240,0.9)),
-  url('https://images.unsplash.com/photo-1604908176997-125f25cc6f3d') no-repeat center center/cover;
-  min-height: 100vh;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-h1,h2,h3 {
-  font-weight: 600;
-}
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a0f0a 0%, #0d1f0d 50%, #0a150a 100%);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 1rem;
+  }
 
-button {
-  cursor: pointer;
-}
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
 
-/* =============================
-   HEADER
-============================= */
+  .logo { display:flex; flex-direction:column; }
 
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.2);
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255,255,255,0.3);
-}
+  .logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--green) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
 
-.logo h1 {
-  font-size: 22px;
-  color: #2e7d32;
-}
+  .logo span {
+    font-size: 0.72rem;
+    color: var(--text2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-top: 2px;
+  }
 
-.logo span {
-  font-size: 12px;
-  color: #555;
-}
+  .header-actions { display:flex; align-items:center; gap:0.75rem; }
 
-.cart-btn {
-  background: rgba(255,255,255,0.3);
-  border: none;
-  padding: 10px 18px;
-  border-radius: 30px;
-  backdrop-filter: blur(10px);
-  font-weight: 500;
-  transition: 0.3s;
-}
+  .btn-cart {
+    background: linear-gradient(135deg, var(--green2), var(--green-dim));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 0.55rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .btn-cart:hover { transform: scale(1.04); }
+  .btn-cart .badge {
+    background: var(--gold);
+    color: #111;
+    border-radius: 50%;
+    width: 20px; height: 20px;
+    font-size: 0.7rem;
+    display: flex; align-items:center; justify-content:center;
+    font-weight: 700;
+  }
 
-.cart-btn:hover {
-  transform: scale(1.05);
-}
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(135deg, #061206 0%, #0d240d 40%, #061506 100%);
+    padding: 2.5rem 1rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(74,222,128,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+    color: var(--text2);
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .hero p {
+    font-size: 0.85rem;
+    color: #5a7a5a;
+    margin-top: 0.4rem;
+  }
 
-/* =============================
-   HERO
-============================= */
+  /* ── CATEGORIES ── */
+  .cats-wrap {
+    max-width: 1100px;
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+  }
+  .cats {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .cat-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 0.45rem 1.1rem;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .cat-btn:hover, .cat-btn.active {
+    background: linear-gradient(135deg, var(--green2), var(--green-dim));
+    border-color: var(--green2);
+    color: #fff;
+  }
 
-.hero {
-  text-align: center;
-  padding: 40px 20px;
-}
+  /* ── PRODUCT GRID ── */
+  .grid-wrap {
+    max-width: 1100px;
+    margin: 1.5rem auto 6rem;
+    padding: 0 1rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 1rem;
+  }
 
-.hero h2 {
-  font-size: 28px;
-  color: #2e7d32;
-}
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: #2a3f2a;
+  }
 
-.hero p {
-  margin-top: 10px;
-  color: #444;
-}
+  .card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    background: var(--card2);
+    display: block;
+  }
 
-/* =============================
-   FILTERS & SEARCH
-============================= */
+  .card-body {
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
 
-.controls {
-  padding: 20px;
-  text-align: center;
-}
+  .card-cat {
+    font-size: 0.65rem;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
 
-.search-bar {
-  width: 90%;
-  max-width: 500px;
-  padding: 12px 15px;
-  border-radius: 25px;
-  border: none;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.4);
-  outline: none;
-  margin-bottom: 15px;
-}
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.25;
+  }
 
-.filter-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
+  .card-desc {
+    font-size: 0.72rem;
+    color: var(--text2);
+    line-height: 1.4;
+    flex: 1;
+  }
 
-.filter-buttons button {
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: none;
-  background: rgba(255,255,255,0.4);
-  backdrop-filter: blur(10px);
-  transition: 0.3s;
-}
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.6rem;
+    gap: 0.4rem;
+  }
 
-.filter-buttons button:hover,
-.filter-buttons button.active {
-  background: #2e7d32;
-  color: white;
-}
+  .price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
 
-/* =============================
-   PRODUCT GRID
-============================= */
+  .btn-add {
+    background: linear-gradient(135deg, var(--green2), var(--green-dim));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.38rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-add:hover { filter: brightness(1.1); transform: scale(1.04); }
+  .btn-add.added { background: linear-gradient(135deg, #166534, #14532d); }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 20px;
-  padding: 20px;
-}
+  /* ── FLOATING BUTTONS ── */
+  .float-group {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 200;
+  }
 
-.card {
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 15px;
-  transition: 0.4s;
-  border: 1px solid rgba(255,255,255,0.3);
-}
+  .fab {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex; align-items:center; justify-content:center;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+    text-decoration: none;
+    position: relative;
+  }
+  .fab:hover { transform: scale(1.1); }
 
-.card:hover {
-  transform: translateY(-5px);
-}
+  .fab-wa { background: #25d366; color: #fff; }
+  .fab-cart {
+    background: linear-gradient(135deg, var(--green2), var(--green-dim));
+    color: #fff;
+    font-size: 1.2rem;
+  }
+  .fab-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: var(--gold);
+    color: #111;
+    border-radius: 50%;
+    width: 20px; height: 20px;
+    font-size: 0.68rem;
+    display: flex; align-items:center; justify-content:center;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+  }
 
-.card img {
-  width: 100%;
-  border-radius: 15px;
-  height: 160px;
-  object-fit: cover;
-}
+  /* ── CART MODAL ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 300;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .overlay.open { display: flex; animation: fadeIn 0.2s; }
 
-.card h3 {
-  margin-top: 10px;
-  font-size: 16px;
-}
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-.card p {
-  font-size: 13px;
-  color: #555;
-}
+  .modal {
+    background: var(--bg2);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s cubic-bezier(0.34,1.2,0.64,1);
+    border: 1px solid var(--border);
+    border-bottom: none;
+  }
 
-.price {
-  font-weight: 600;
-  margin: 8px 0;
-  color: #2e7d32;
-}
+  .modal-header {
+    padding: 1.2rem 1.2rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .btn-close {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items:center; justify-content:center;
+    transition: all 0.2s;
+  }
+  .btn-close:hover { background: var(--card2); color: var(--text); }
 
-.add-btn {
-  background: #2e7d32;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
-  transition: 0.3s;
-}
+  .modal-body { overflow-y: auto; flex: 1; padding: 1rem 1.2rem; }
 
-.add-btn.added {
-  background: #4caf50;
-  transform: scale(1.1);
-}
+  .empty-cart {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text2);
+  }
+  .empty-cart .emoji { font-size: 3rem; margin-bottom: 0.5rem; }
 
-/* =============================
-   CART MODAL
-============================= */
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cart-item:last-child { border-bottom: none; }
 
-.cart-modal {
-  position: fixed;
-  right: -400px;
-  top: 0;
-  width: 350px;
-  height: 100%;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(20px);
-  box-shadow: -5px 0 20px rgba(0,0,0,0.2);
-  padding: 20px;
-  transition: 0.4s;
-  overflow-y: auto;
-  z-index: 2000;
-}
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name { font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cart-item-price { font-size: 0.8rem; color: var(--gold); margin-top: 2px; }
 
-.cart-modal.open {
-  right: 0;
-}
+  .qty-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .qty-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items:center; justify-content:center;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .qty-btn:hover { background: var(--green-dim); border-color: var(--green-dim); }
+  .qty-num { min-width: 22px; text-align:center; font-weight: 600; font-size: 0.9rem; }
 
-.cart-modal h2 {
-  margin-bottom: 15px;
-}
+  .btn-remove {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+  }
+  .btn-remove:hover { opacity: 1; }
 
-.cart-items {
-  font-size: 14px;
-}
+  .modal-footer {
+    padding: 1rem 1.2rem;
+    border-top: 1px solid var(--border);
+  }
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  .total-label { color: var(--text2); font-weight: 500; }
+  .total-amount { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); font-weight: 700; }
 
-.total-section {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  padding-top: 15px;
-}
+  .btn-order {
+    width: 100%;
+    background: linear-gradient(135deg, var(--green2), var(--green-dim));
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.9rem;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn-order:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-order:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
 
-.checkout-btn {
-  width: 100%;
-  padding: 10px;
-  border-radius: 25px;
-  border: none;
-  background: #2e7d32;
-  color: white;
-  margin-top: 15px;
-}
+  /* ── ORDER FORM MODAL ── */
+  .form-modal {
+    background: var(--bg2);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s cubic-bezier(0.34,1.2,0.64,1);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    padding: 1.5rem 1.2rem;
+  }
 
-/* =============================
-   TOAST
-============================= */
+  .form-modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
 
-.toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #2e7d32;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
-  opacity: 0;
-  transition: 0.4s;
-}
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text2);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--green2); }
+  .form-group textarea { height: 80px; resize: vertical; }
 
-.toast.show {
-  opacity: 1;
-}
+  .form-btns { display: flex; gap: 0.75rem; margin-top: 1.2rem; }
+  .btn-back {
+    flex: 0 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    border-radius: 12px;
+    padding: 0.9rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-back:hover { border-color: var(--green2); color: var(--text); }
 
-/* =============================
-   WHATSAPP BUTTON
-============================= */
+  /* ── CONFIRMATION ── */
+  .confirm-modal {
+    background: var(--bg2);
+    border-radius: 20px;
+    width: calc(100% - 2rem);
+    max-width: 400px;
+    margin: auto;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    animation: fadeIn 0.3s;
+    border: 1px solid #2a3f2a;
+  }
+  .confirm-icon { font-size: 3.5rem; margin-bottom: 0.75rem; }
+  .confirm-modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+  }
+  .confirm-modal p { color: var(--text2); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.2rem; }
+  .btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #25d366;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  .btn-wa:hover { filter: brightness(1.1); }
 
-.whatsapp {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: #25d366;
-  color: white;
-  padding: 12px 15px;
-  border-radius: 50%;
-  font-size: 20px;
-  text-decoration: none;
-}
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: #3a5a3a;
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
 
+  /* ── HIDDEN FIELD ── */
+  .sr-only { position:absolute; left:-9999px; }
+
+  /* ── RESPONSIVE ── */
+  @media (min-width: 600px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .modal, .form-modal { border-radius: 20px; }
+    .overlay { align-items: center; }
+  }
 </style>
 </head>
-
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="logo">
-    <h1>Tathastu</h1>
-    <span>Leisure meets Luxury</span>
+  <div class="header-inner">
+    <div class="logo">
+      <h1>Tathastu</h1>
+      <span>Leisure meets Luxury</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn-cart" onclick="openCart()">
+        🛒 Cart <span class="badge" id="cartBadgeHeader">0</span>
+      </button>
+    </div>
   </div>
-  <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
 </header>
 
-<section class="hero">
-  <h2>Premium Dining Experience</h2>
-  <p>Explore our luxurious menu crafted with love.</p>
-</section>
+<!-- HERO -->
+<div class="hero">
+  <h2>Pure Veg North Indian Cuisine</h2>
+  <p>Freshly prepared with love · Order & we'll deliver to you</p>
+</div>
 
-<section class="controls">
-  <input type="text" class="search-bar" placeholder="Search dishes..." onkeyup="searchProduct()">
-  <div class="filter-buttons" id="filters"></div>
-</section>
+<!-- CATEGORY FILTERS -->
+<div class="cats-wrap">
+  <div class="cats" id="catButtons"></div>
+</div>
 
-<section class="products" id="product-list"></section>
+<!-- PRODUCT GRID -->
+<div class="grid-wrap">
+  <div class="grid" id="productGrid"></div>
+</div>
 
-<div class="cart-modal" id="cartModal">
-  <h2>Your Cart</h2>
-  <div class="cart-items" id="cartItems"></div>
+<!-- FLOATING BUTTONS -->
+<div class="float-group">
+  <a class="fab fab-wa" href="https://wa.me/919060880998" target="_blank" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.534 5.855L0 24l6.335-1.524A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.655-.49-5.197-1.347l-.372-.22-3.761.905.936-3.671-.242-.381A9.97 9.97 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  </a>
+  <button class="fab fab-cart" onclick="openCart()" title="View Cart" aria-label="View Cart">
+    🛒
+    <span class="fab-badge" id="cartBadgeFab">0</span>
+  </button>
+</div>
 
-  <div class="total-section">
-    <p>Subtotal: ₹<span id="subtotal">0</span></p>
-    <p>GST (5%): ₹<span id="gst">0</span></p>
-    <h3>Total: ₹<span id="total">0</span></h3>
-    <button class="checkout-btn" onclick="openCheckout()">Place Order</button>
+<!-- CART OVERLAY -->
+<div class="overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>🛒 Your Cart</h3>
+      <button class="btn-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="modal-body" id="cartBody"></div>
+    <div class="modal-footer" id="cartFooter"></div>
   </div>
 </div>
 
-<div class="toast" id="toast">Added to cart ✓</div>
+<!-- ORDER FORM OVERLAY -->
+<div class="overlay" id="orderOverlay" onclick="handleOrderOverlayClick(event)">
+  <div class="form-modal">
+    <h3>📋 Place Your Order</h3>
+    <form id="orderForm" action="https://formspree.io/f/xwvnzqkl" method="POST" onsubmit="handleSubmit(event)">
+      <!-- Hidden fields for order summary -->
+      <input type="hidden" name="_subject" id="emailSubject">
+      <input type="hidden" name="order_summary" id="orderSummary">
+      <input type="hidden" name="grand_total" id="grandTotal">
 
-<a class="whatsapp" href="https://wa.me/919123247208" target="_blank">💬</a>
+      <div class="form-group">
+        <label>Customer Name *</label>
+        <input type="text" name="customer_name" required placeholder="Enter your full name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" name="phone" required placeholder="Enter your phone number">
+      </div>
+      <div class="form-group">
+        <label>Room Number *</label>
+        <input type="text" name="room_number" required placeholder="Enter your room number">
+      </div>
+      <div class="form-group">
+        <label>Special Instructions (Optional)</label>
+        <textarea name="special_instructions" placeholder="Any dietary preferences, spice level, etc."></textarea>
+      </div>
 
-<!-- =============================
-     JAVASCRIPT START
-============================= -->
+      <div class="form-btns">
+        <button type="button" class="btn-back" onclick="backToCart()">← Back</button>
+        <button type="submit" class="btn-order" style="flex:1">✅ Confirm Order</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- CONFIRMATION OVERLAY -->
+<div class="overlay" id="confirmOverlay">
+  <div class="confirm-modal">
+    <div class="confirm-icon">🎉</div>
+    <h3>Order Placed!</h3>
+    <p>Tathastu has received your order and will contact you on WhatsApp shortly to confirm availability and delivery.</p>
+    <a class="btn-wa" href="https://wa.me/919060880998" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.534 5.855L0 24l6.335-1.524A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.655-.49-5.197-1.347l-.372-.22-3.761.905.936-3.671-.242-.381A9.97 9.97 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Chat on WhatsApp
+    </a>
+    <button onclick="closeConfirm()" style="display:block;margin:1rem auto 0;background:none;border:none;color:var(--text2);font-size:0.85rem;cursor:pointer;font-family:'DM Sans',sans-serif;">Close</button>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Tathastu · Leisure meets Luxury · 📞 9060880998
+</footer>
 
 <script>
-
-const GST_RATE = 0.05;
-
-let cart = [];
-/* =============================
-   PRODUCT DATABASE (From PDF)
-============================= */
-
+// ═══════════════════════════════════════
+//  PRODUCT DATA
+// ═══════════════════════════════════════
 const products = [
+  // STARTERS
+  {
+    id: 1, name: "Mushroom Galouti", cat: "Starters",
+    price: 180,
+    desc: "Melt-in-mouth mushroom patties with aromatic spices.",
+    img: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80"
+  },
+  {
+    id: 2, name: "Paneer Tikka", cat: "Starters",
+    price: 220,
+    desc: "Chargrilled cottage cheese with vibrant bell peppers & chutneys.",
+    img: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&q=80"
+  },
+  {
+    id: 3, name: "Achari Soya Chaap", cat: "Starters",
+    price: 190,
+    desc: "Tender soya chaap marinated in tangy pickle-spice blend.",
+    img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80"
+  },
+  {
+    id: 4, name: "Veg Seekh Kabab", cat: "Starters",
+    price: 170,
+    desc: "Smoky vegetable skewers packed with herbs and spice.",
+    img: "https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80"
+  },
+  {
+    id: 5, name: "Multani Mushroom Tikka", cat: "Starters",
+    price: 200,
+    desc: "Succulent mushrooms in Multani-style cream-spice marinade.",
+    img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80"
+  },
+  // DALS
+  {
+    id: 6, name: "Dal Tadka", cat: "Dal",
+    price: 160,
+    desc: "Yellow lentils tempered with cumin, garlic and dried red chilli.",
+    img: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80"
+  },
+  {
+    id: 7, name: "Dal Fry", cat: "Dal",
+    price: 160,
+    desc: "Fried toor dal with onion-tomato masala and ghee drizzle.",
+    img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80"
+  },
+  {
+    id: 8, name: "Dal Makhani", cat: "Dal",
+    price: 200,
+    desc: "Slow-cooked black urad dal simmered in buttery tomato gravy.",
+    img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=80"
+  },
+  {
+    id: 9, name: "Dal Dhaba", cat: "Dal",
+    price: 170,
+    desc: "Rustic roadside-style mixed dal with desi ghee tempering.",
+    img: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400&q=80"
+  },
+  // MAIN COURSE - VEG
+  {
+    id: 10, name: "Mix Veg Navratan", cat: "Main Course",
+    price: 210,
+    desc: "Nine mixed vegetables cooked in a rich cashew-cream gravy.",
+    img: "https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&q=80"
+  },
+  {
+    id: 11, name: "Vegetable Korma", cat: "Main Course",
+    price: 200,
+    desc: "Soft vegetables in fragrant coconut-cashew white gravy.",
+    img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80"
+  },
+  {
+    id: 12, name: "Paneer Do Pyaza", cat: "Main Course",
+    price: 250,
+    desc: "Cottage cheese tossed with caramelised double onions.",
+    img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&q=80"
+  },
+  {
+    id: 13, name: "Paneer Lababdar", cat: "Main Course",
+    price: 260,
+    desc: "Rich, velvety tomato-cashew gravy with soft paneer cubes.",
+    img: "https://images.unsplash.com/photo-1631452180775-1b46e0c80bdf?w=400&q=80"
+  },
+  {
+    id: 14, name: "Mushroom Masala", cat: "Main Course",
+    price: 220,
+    desc: "Button mushrooms sautéed in bold North Indian masala gravy.",
+    img: "https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=400&q=80"
+  },
+  {
+    id: 15, name: "Mutter Mushroom", cat: "Main Course",
+    price: 210,
+    desc: "Green peas and mushrooms in spiced onion-tomato base.",
+    img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&q=80"
+  },
+  {
+    id: 16, name: "Veg Jhalfrenji", cat: "Main Course",
+    price: 200,
+    desc: "Stir-fried mixed vegetables tossed in tangy Indo-Chinese sauce.",
+    img: "https://images.unsplash.com/photo-1512058533999-ab823a53ebdb?w=400&q=80"
+  },
+  {
+    id: 17, name: "Gobhi Masala", cat: "Main Course",
+    price: 180,
+    desc: "Cauliflower florets cooked in hearty North Indian masala.",
+    img: "https://images.unsplash.com/photo-1606756790138-261d2b21cd75?w=400&q=80"
+  },
+  {
+    id: 18, name: "Zeera Aloo", cat: "Main Course",
+    price: 160,
+    desc: "Cumin-tempered baby potatoes with coriander – a simple classic.",
+    img: "https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=400&q=80"
+  },
+  {
+    id: 19, name: "Paneer Butter Masala", cat: "Main Course",
+    price: 270,
+    desc: "Timeless paneer in rich, creamy tomato-butter gravy.",
+    img: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=80"
+  },
+  {
+    id: 20, name: "Aloo Gobhi Adrakhi", cat: "Main Course",
+    price: 170,
+    desc: "Ginger-kissed potato and cauliflower dry curry.",
+    img: "https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&q=80"
+  },
+  {
+    id: 21, name: "Aloo Bhaja", cat: "Main Course",
+    price: 130,
+    desc: "Crispy fried potato slices with mustard seeds and curry leaf.",
+    img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=80"
+  }
+];
 
-/* BREAKFAST */
-{ id:1, name:"Cut Fruit", price:110, category:"Breakfast", desc:"Fresh seasonal fruits bowl", img:"https://images.unsplash.com/photo-1567306226416-28f0efdc88ce"},
-{ id:2, name:"Cereals with Milk", price:125, category:"Breakfast", desc:"Hot or cold milk served with cereals", img:"https://images.unsplash.com/photo-1585238342028-966bb0b3e2d6"},
-{ id:3, name:"Bread Butter Jam", price:95, category:"Breakfast", desc:"Classic morning combo", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:4, name:"Kids Love Maggi", price:99, category:"Breakfast", desc:"Favorite noodles for kids", img:"https://images.unsplash.com/photo-1617196039897-6e5d8a1c0f4f"},
-{ id:5, name:"Veg Cole Slaw Sandwich", price:125, category:"Breakfast", desc:"Fresh veg sandwich", img:"https://images.unsplash.com/photo-1551782450-a2132b4ba21d"},
-{ id:6, name:"Cheese Sandwich", price:155, category:"Breakfast", desc:"Loaded with cheese", img:"https://images.unsplash.com/photo-1551782450-3b7c4e8b8c50"},
-{ id:7, name:"Paratha", price:155, category:"Breakfast", desc:"Plain/Aloo/Stuffed", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:8, name:"Poori Sabzi", price:155, category:"Breakfast", desc:"Traditional poori with sabzi", img:"https://images.unsplash.com/photo-1625943553852-781c6dd46faa"},
-{ id:9, name:"Poha", price:125, category:"Breakfast", desc:"Light and healthy breakfast", img:"https://images.unsplash.com/photo-1598514982843-52d89c20b33b"},
-{ id:10, name:"Eggs to Order", price:125, category:"Breakfast", desc:"Boiled/Sunny side/Omelette", img:"https://images.unsplash.com/photo-1582725174704-70f6f8a6c8c1"},
-{ id:11, name:"Indian Breakfast Combo", price:325, category:"Breakfast", desc:"Full Indian breakfast platter", img:"https://images.unsplash.com/photo-1589308078056-f6a1d6b2e2b7"},
-{ id:12, name:"Continental Breakfast Combo", price:325, category:"Breakfast", desc:"Western style breakfast", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:13, name:"South Indian Breakfast", price:325, category:"Breakfast", desc:"Idli/Vada/Upma platter", img:"https://images.unsplash.com/photo-1617196039897-6e5d8a1c0f4f"},
-{ id:14, name:"Hot Milk", price:95, category:"Breakfast", desc:"Fresh hot milk", img:"https://images.unsplash.com/photo-1582719478187-64dce0f3dbac"},
-{ id:15, name:"Health Drink", price:115, category:"Breakfast", desc:"Horlicks/Bournvita", img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"},
+// ═══════════════════════════════════════
+//  CART STATE
+// ═══════════════════════════════════════
+let cart = JSON.parse(localStorage.getItem('tathastu_cart') || '[]');
 
-/* REFRESHMENTS */
-{ id:16, name:"Canned Juice", price:95, category:"Beverages", desc:"Refreshing fruit juice", img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"},
-{ id:17, name:"Soft Drinks", price:85, category:"Beverages", desc:"Chilled soft drinks", img:"https://images.unsplash.com/photo-1582452073262-ef5b95a9b3d0"},
-{ id:18, name:"Butter Milk", price:120, category:"Beverages", desc:"Cooling buttermilk", img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
-{ id:19, name:"Lassi", price:120, category:"Beverages", desc:"Sweet & salted lassi", img:"https://images.unsplash.com/photo-1584270354949-1a7a9b7b1f1f"},
-{ id:20, name:"Tea", price:70, category:"Beverages", desc:"Freshly brewed tea", img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93"},
-{ id:21, name:"Coffee", price:120, category:"Beverages", desc:"Hot premium coffee", img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93"},
-{ id:22, name:"Red Bull", price:220, category:"Beverages", desc:"Energy drink", img:"https://images.unsplash.com/photo-1584270354949-1a7a9b7b1f1f"},
+function saveCart() {
+  localStorage.setItem('tathastu_cart', JSON.stringify(cart));
+  updateBadges();
+}
 
-/* SOUPS */
-{ id:23, name:"Manchow Soup", price:199, category:"Soup", desc:"Spicy manchow soup", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:24, name:"Lemon Coriander Soup", price:199, category:"Soup", desc:"Light lemon soup", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:25, name:"Hot & Sour Soup", price:199, category:"Soup", desc:"Tangy hot soup", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:26, name:"Sweet Corn Soup", price:199, category:"Soup", desc:"Creamy sweet corn", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:27, name:"Tomato Soup", price:199, category:"Soup", desc:"Classic tomato soup", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
+function getTotal() {
+  return cart.reduce((s, i) => s + i.price * i.qty, 0);
+}
 
-/* STARTERS VEG */
-{ id:28, name:"Chilli Paneer", price:290, category:"Snacks", desc:"Spicy paneer starter", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:29, name:"Paneer 65", price:290, category:"Snacks", desc:"Crispy paneer bites", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:30, name:"Mushroom 65", price:290, category:"Snacks", desc:"Spicy mushroom starter", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:31, name:"Crispy Chilly Baby Corn", price:290, category:"Snacks", desc:"Crunchy baby corn", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:32, name:"Corn Salt & Pepper", price:290, category:"Snacks", desc:"Corn tossed with spices", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:33, name:"Hara Bhara Kabab", price:290, category:"Snacks", desc:"Green veg kabab", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:34, name:"Dahi ke Kabab", price:290, category:"Snacks", desc:"Soft yogurt kabab", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:35, name:"Golden Fry Baby Corn", price:290, category:"Snacks", desc:"Golden fried baby corn", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:36, name:"Peanut Masala", price:190, category:"Snacks", desc:"Masala peanuts", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:37, name:"French Fry", price:175, category:"Snacks", desc:"Classic fries", img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
+function getTotalQty() {
+  return cart.reduce((s, i) => s + i.qty, 0);
+}
 
-/* =============================
-   RENDER PRODUCTS
-============================= */
+function updateBadges() {
+  const q = getTotalQty();
+  document.getElementById('cartBadgeHeader').textContent = q;
+  document.getElementById('cartBadgeFab').textContent = q;
+}
 
-const productList = document.getElementById("product-list");
-const filtersDiv = document.getElementById("filters");
+// ═══════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════
+let activeFilter = 'All';
 
-function renderProducts(items){
-  productList.innerHTML="";
-  items.forEach(p=>{
-    productList.innerHTML += `
-      <div class="card">
-        <img src="${p.img}">
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-        <div class="price">₹${p.price}</div>
-        <button class="add-btn" onclick="addToCart(${p.id},this)">Add to Cart</button>
+function renderCategories() {
+  const cats = ['All', ...new Set(products.map(p => p.cat))];
+  const wrap = document.getElementById('catButtons');
+  wrap.innerHTML = cats.map(c =>
+    `<button class="cat-btn ${c === activeFilter ? 'active' : ''}" onclick="filterCat('${c}')">${c}</button>`
+  ).join('');
+}
+
+function filterCat(cat) {
+  activeFilter = cat;
+  renderCategories();
+  renderGrid();
+}
+
+function renderGrid() {
+  const filtered = activeFilter === 'All' ? products : products.filter(p => p.cat === activeFilter);
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = filtered.map(p => {
+    const inCart = cart.some(c => c.id === p.id);
+    return `
+    <div class="card">
+      <img class="card-img" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80'">
+      <div class="card-body">
+        <span class="card-cat">${p.cat}</span>
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-footer">
+          <span class="price">₹${p.price}</span>
+          <button class="btn-add ${inCart ? 'added' : ''}" onclick="addToCart(${p.id}, this)">
+            ${inCart ? '✓ Added' : '+ Add'}
+          </button>
+        </div>
       </div>
-    `;
-  });
+    </div>`;
+  }).join('');
 }
 
-function setupFilters(){
-  const categories = [...new Set(products.map(p=>p.category))];
-  filtersDiv.innerHTML = `<button class="active" onclick="filterCategory('All',this)">All</button>`;
-  categories.forEach(cat=>{
-    filtersDiv.innerHTML += `<button onclick="filterCategory('${cat}',this)">${cat}</button>`;
-  });
+// ═══════════════════════════════════════
+//  CART ACTIONS
+// ═══════════════════════════════════════
+function addToCart(id, btn) {
+  const p = products.find(x => x.id === id);
+  const existing = cart.find(c => c.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 });
+  }
+  saveCart();
+  btn.textContent = '✓ Added';
+  btn.classList.add('added');
 }
 
-function filterCategory(cat,btn){
-  document.querySelectorAll(".filter-buttons button").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  if(cat==="All") renderProducts(products);
-  else renderProducts(products.filter(p=>p.category===cat));
+function updateQty(id, delta) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+  saveCart();
+  renderCart();
+  // sync add buttons
+  renderGrid();
 }
 
-function searchProduct(){
-  const val=document.querySelector(".search-bar").value.toLowerCase();
-  renderProducts(products.filter(p=>p.name.toLowerCase().includes(val)));
+function removeItem(id) {
+  cart = cart.filter(c => c.id !== id);
+  saveCart();
+  renderCart();
+  renderGrid();
 }
 
-/* =============================
-   CART LOGIC
-============================= */
+// ═══════════════════════════════════════
+//  CART MODAL
+// ═══════════════════════════════════════
+function renderCart() {
+  const body = document.getElementById('cartBody');
+  const footer = document.getElementById('cartFooter');
 
-function addToCart(id,btn){
-  const item=products.find(p=>p.id===id);
-  const existing=cart.find(p=>p.id===id);
-  if(existing) existing.qty++;
-  else cart.push({...item,qty:1});
-  btn.classList.add("added");
-  setTimeout(()=>btn.classList.remove("added"),500);
-  updateCart();
-  showToast();
-}
-
-function updateCart(){
-  document.getElementById("cart-count").innerText=cart.reduce((a,b)=>a+b.qty,0);
-  const cartItems=document.getElementById("cartItems");
-  cartItems.innerHTML="";
-  let subtotal=0;
-  cart.forEach(item=>{
-    subtotal+=item.price*item.qty;
-    cartItems.innerHTML+=`
-      <div>${item.name} x ${item.qty} - ₹${item.price*item.qty}</div>
-    `;
-  });
-  document.getElementById("subtotal").innerText=subtotal.toFixed(2);
-  const gst=subtotal*GST_RATE;
-  document.getElementById("gst").innerText=gst.toFixed(2);
-  document.getElementById("total").innerText=(subtotal+gst).toFixed(2);
-}
-
-function toggleCart(){
-  document.getElementById("cartModal").classList.toggle("open");
-}
-
-function showToast(){
-  const toast=document.getElementById("toast");
-  toast.classList.add("show");
-  setTimeout(()=>toast.classList.remove("show"),2000);
-}
-
-/* INIT */
-renderProducts(products);
-setupFilters();
-/* =============================
-   ADD REMAINING PRODUCTS
-============================= */
-
-products.push(
-
-/* FROM TANDOOR VEG */
-{ id:38, name:"Mushroom Galouti", price:395, category:"North Indian Cuisine", desc:"Soft tandoor mushroom delight", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:39, name:"Paneer Tikka", price:305, category:"North Indian Cuisine", desc:"Char grilled paneer cubes", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:40, name:"Achari Soya Chaap", price:305, category:"North Indian Cuisine", desc:"Pickle flavored chaap", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:41, name:"Veg Seekh Kabab", price:305, category:"North Indian Cuisine", desc:"Veg kabab from clay oven", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-
-/* MAIN COURSE VEG */
-{ id:42, name:"Dal Tadka", price:330, category:"North Indian Cuisine", desc:"Tempered yellow dal", img:"https://images.unsplash.com/photo-1589308078056-f6a1d6b2e2b7"},
-{ id:43, name:"Dal Makhani", price:330, category:"North Indian Cuisine", desc:"Creamy black lentils", img:"https://images.unsplash.com/photo-1589308078056-f6a1d6b2e2b7"},
-{ id:44, name:"Paneer Butter Masala", price:405, category:"North Indian Cuisine", desc:"Rich creamy paneer curry", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:45, name:"Mushroom Masala", price:405, category:"North Indian Cuisine", desc:"Spicy mushroom gravy", img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836"},
-{ id:46, name:"Aloo Gobhi", price:365, category:"North Indian Cuisine", desc:"Classic potato cauliflower", img:"https://images.unsplash.com/photo-1589308078056-f6a1d6b2e2b7"},
-
-/* RICE */
-{ id:47, name:"Steamed Basmati Rice", price:145, category:"North Indian Cuisine", desc:"Premium long grain rice", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:48, name:"Jeera Rice", price:155, category:"North Indian Cuisine", desc:"Cumin flavored rice", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:49, name:"Veg Biryani", price:345, category:"North Indian Cuisine", desc:"Aromatic veg biryani", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-
-/* NON VEG */
-{ id:50, name:"Chicken Tandoori (Half)", price:405, category:"North Indian Cuisine", desc:"Half roasted chicken", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:51, name:"Chicken Tandoori (Full)", price:799, category:"North Indian Cuisine", desc:"Full roasted chicken", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:52, name:"Chicken Butter Masala", price:405, category:"North Indian Cuisine", desc:"Delhi style butter chicken", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:53, name:"Chicken Biryani", price:425, category:"North Indian Cuisine", desc:"Traditional chicken biryani", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-{ id:54, name:"Mutton Biryani", price:505, category:"North Indian Cuisine", desc:"Royal mutton biryani", img:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"},
-
-/* BREAD */
-{ id:55, name:"Tandoori Roti", price:40, category:"North Indian Cuisine", desc:"Fresh clay oven roti", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-{ id:56, name:"Butter Naan", price:65, category:"North Indian Cuisine", desc:"Soft butter naan", img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
-
-/* DESSERT */
-{ id:57, name:"Gulab Jamun", price:90, category:"Dessert", desc:"Hot sweet dumplings", img:"https://images.unsplash.com/photo-1589308078056-f6a1d6b2e2b7"},
-{ id:58, name:"Rasmalai", price:110, category:"Dessert", desc:"Soft cottage cheese sweet", img:"https://images.unsplash.com/photo-1589308078056-f6a1d6b2e2b7"},
-{ id:59, name:"Brownie with Ice Cream", price:275, category:"Dessert", desc:"Chocolate brownie delight", img:"https://images.unsplash.com/photo-1589308078056-f6a1d6b2e2b7"}
-
-);
-
-/* Re-render to include all */
-renderProducts(products);
-setupFilters();
-
-/* =============================
-   CHECKOUT FORM
-============================= */
-
-function openCheckout(){
-  if(cart.length===0){
-    alert("Cart is empty!");
+  if (cart.length === 0) {
+    body.innerHTML = `<div class="empty-cart"><div class="emoji">🍽️</div><p>Your cart is empty</p><p style="font-size:0.8rem;margin-top:0.3rem;">Add some delicious items!</p></div>`;
+    footer.innerHTML = '';
     return;
   }
 
-  const total=document.getElementById("total").innerText;
-
-  const formHTML=`
-  <div id="checkoutModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:3000;">
-    <div style="background:white;padding:20px;border-radius:15px;width:90%;max-width:400px;">
-      <h3>Checkout</h3>
-      <form action="https://formspree.io/f/xwvnzqkl" method="POST" onsubmit="submitOrder(event)">
-        <input required name="Customer Name" placeholder="Customer Name" style="width:100%;margin:8px 0;padding:8px;">
-        <input required name="Phone" placeholder="Phone Number" style="width:100%;margin:8px 0;padding:8px;">
-        <input required name="Room Number" placeholder="Room Number" style="width:100%;margin:8px 0;padding:8px;">
-        <textarea name="Instructions" placeholder="Special Instructions" style="width:100%;margin:8px 0;padding:8px;"></textarea>
-
-        <input type="hidden" name="Order Details" id="orderDetails">
-        <input type="hidden" name="Grand Total" value="₹${total}">
-
-        <button type="submit" style="width:100%;padding:10px;background:#2e7d32;color:white;border:none;border-radius:8px;">Confirm Order</button>
-      </form>
+  body.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">₹${item.price} × ${item.qty} = <strong>₹${item.price * item.qty}</strong></div>
+      </div>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="updateQty(${item.id}, -1)">−</button>
+        <span class="qty-num">${item.qty}</span>
+        <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+      </div>
+      <button class="btn-remove" onclick="removeItem(${item.id})" title="Remove">🗑</button>
     </div>
-  </div>
+  `).join('');
+
+  footer.innerHTML = `
+    <div class="total-row">
+      <span class="total-label">Grand Total</span>
+      <span class="total-amount">₹${getTotal()}</span>
+    </div>
+    <button class="btn-order" onclick="openOrderForm()">📋 Place Order →</button>
   `;
-
-  document.body.insertAdjacentHTML("beforeend",formHTML);
-
-  let summary="";
-  cart.forEach(item=>{
-    summary+=`${item.name} x ${item.qty} = ₹${item.price*item.qty}\n`;
-  });
-  summary+=`\nTotal: ₹${total}`;
-  document.getElementById("orderDetails").value=summary;
 }
 
-function submitOrder(e){
+function openCart() {
+  renderCart();
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === e.currentTarget) closeCart();
+}
+
+// ═══════════════════════════════════════
+//  ORDER FORM
+// ═══════════════════════════════════════
+function openOrderForm() {
+  if (cart.length === 0) return;
+
+  // Populate hidden fields
+  const summary = cart.map(i => `${i.name} x${i.qty} = ₹${i.price * i.qty}`).join('\n');
+  const fullSummary = `ORDER DETAILS:\n${'─'.repeat(30)}\n${summary}\n${'─'.repeat(30)}\nGRAND TOTAL: ₹${getTotal()}`;
+
+  document.getElementById('orderSummary').value = fullSummary;
+  document.getElementById('grandTotal').value = `₹${getTotal()}`;
+  document.getElementById('emailSubject').value = `New Order – Tathastu (₹${getTotal()})`;
+
+  closeCart();
+  document.getElementById('orderOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function backToCart() {
+  document.getElementById('orderOverlay').classList.remove('open');
+  openCart();
+}
+
+function handleOrderOverlayClick(e) {
+  if (e.target === e.currentTarget) {
+    document.getElementById('orderOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleSubmit(e) {
   e.preventDefault();
+  const form = document.getElementById('orderForm');
+  const data = new FormData(form);
 
-  fetch(e.target.action,{
-    method:"POST",
-    body:new FormData(e.target),
-    headers:{'Accept':'application/json'}
-  }).then(response=>{
-    if(response.ok){
-      cart=[];
-      updateCart();
-      document.getElementById("checkoutModal").remove();
-      alert("Order placed! Tathastu will contact you on WhatsApp to confirm.");
-      window.open("https://wa.me/919123247208","_blank");
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(res => {
+    if (res.ok) {
+      document.getElementById('orderOverlay').classList.remove('open');
+      cart = [];
+      saveCart();
+      renderGrid();
+      form.reset();
+      document.getElementById('confirmOverlay').classList.add('open');
+    } else {
+      alert('There was an issue submitting your order. Please try again or call us directly at 9060880998.');
     }
+  }).catch(() => {
+    alert('Network error. Please check your connection or call us at 9060880998.');
   });
 }
 
-/* =============================
-   END OF FILE
-============================= */
+function closeConfirm() {
+  document.getElementById('confirmOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+renderCategories();
+renderGrid();
+updateBadges();
 </script>
 </body>
 </html>
