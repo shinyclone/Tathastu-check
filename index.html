@@ -622,17 +622,18 @@
   <div class="form-modal">
     <h3>📋 Place Your Order</h3>
     <form id="orderForm"
+          onsubmit="return prepareOrderSummary()"
           name="order"
           method="POST"
+          action="/success"
           data-netlify="true"
           netlify-honeypot="bot-field">
 
-      <!-- Netlify required hidden fields -->
       <input type="hidden" name="form-name" value="order">
-      <input type="hidden" name="bot-field" style="display:none">
-      <!-- Cart summary injected by JS before submit -->
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <!-- Cart summary populated by JS on submit -->
       <input type="hidden" name="order_summary" id="f_summary">
-      <input type="hidden" name="grand_total"   id="f_total">
+      <input type="hidden" name="grand_total" id="f_total">
 
       <div class="form-group">
         <label>Customer Name *</label>
@@ -652,7 +653,7 @@
       </div>
       <div class="form-btns">
         <button type="button" class="btn-back" onclick="backToCart()">← Back</button>
-        <button type="submit" id="submitBtn" class="btn-order" style="flex:1">✅ Confirm Order</button>
+        <button type="submit" class="btn-order" style="flex:1">✅ Confirm Order</button>
       </div>
     </form>
   </div>
@@ -969,12 +970,6 @@ function handleOverlayClick(e) {
 // ═══════════════════════════════════════
 function openOrderForm() {
   if (cart.length === 0) return;
-
-  // Pre-fill hidden cart summary fields so Netlify receives full order details
-  const lines = cart.map(i => i.name + ' x' + i.qty + ' = Rs.' + (i.price * i.qty)).join(' | ');
-  document.getElementById('f_summary').value = lines;
-  document.getElementById('f_total').value   = 'Rs.' + getTotal();
-
   closeCart();
   document.getElementById('orderOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -992,49 +987,16 @@ function handleOrderOverlayClick(e) {
   }
 }
 
-// Netlify Forms submission — uses fetch so we can intercept and show our own UI
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('orderForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const btn  = document.getElementById('submitBtn');
-    btn.disabled    = true;
-    btn.textContent = 'Placing order…';
-
-    const formData = new FormData(form);
-
-    fetch('/', {
-      method : 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body   : new URLSearchParams(formData).toString()
-    })
-    .then(function (res) {
-      if (res.ok) {
-        // Success — clear cart, reset form, show confirmation
-        cart = [];
-        saveCart();
-        renderGrid();
-        form.reset();
-        document.getElementById('f_summary').value = '';
-        document.getElementById('f_total').value   = '';
-        document.getElementById('orderOverlay').classList.remove('open');
-        document.body.style.overflow = '';
-        document.getElementById('confirmOverlay').classList.add('open');
-      } else {
-        btn.disabled    = false;
-        btn.textContent = '✅ Confirm Order';
-        alert('Something went wrong (status ' + res.status + '). Please try again or call 9060880998.');
-      }
-    })
-    .catch(function () {
-      btn.disabled    = false;
-      btn.textContent = '✅ Confirm Order';
-      alert('Network error. Please check your connection and try again, or call 9060880998.');
-    });
-  });
-});
-
+// Populate hidden cart fields just before Netlify submits the form natively
+function prepareOrderSummary() {
+  var lines = cart.map(function(i) {
+    return i.name + ' x' + i.qty + ' = Rs.' + (i.price * i.qty);
+  }).join(' | ');
+  document.getElementById('f_summary').value = lines || '(empty)';
+  document.getElementById('f_total').value   = 'Rs.' + getTotal();
+  // Cart will be cleared by success.html redirect — nothing else needed
+  return true; // allow native form submission to proceed
+}
 function closeConfirm() {
   document.getElementById('confirmOverlay').classList.remove('open');
   document.body.style.overflow = '';
