@@ -992,14 +992,27 @@ function handleOrderOverlayClick(e) {
 function handleSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('orderForm');
-  const data = new FormData(form);
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
 
-  fetch(form.action, {
+  // Build JSON payload — avoids CORS preflight issues on mobile browsers
+  const fd = new FormData(form);
+  const payload = {};
+  fd.forEach((val, key) => { payload[key] = val; });
+
+  fetch('https://formspree.io/f/xwvnzqkl', {
     method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(res => {
-    if (res.ok) {
+    body: JSON.stringify(payload),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  }).then(res => res.json().then(data => ({ ok: res.ok, data })))
+  .then(({ ok, data }) => {
+    btn.disabled = false;
+    btn.textContent = '✅ Confirm Order';
+    if (ok) {
       document.getElementById('orderOverlay').classList.remove('open');
       cart = [];
       saveCart();
@@ -1007,10 +1020,14 @@ function handleSubmit(e) {
       form.reset();
       document.getElementById('confirmOverlay').classList.add('open');
     } else {
-      alert('There was an issue submitting your order. Please try again or call us directly at 9060880998.');
+      const msg = (data && data.error) ? data.error : 'Submission failed. Please try again.';
+      alert('⚠️ ' + msg + '\n\nOr call us directly: 9060880998');
     }
-  }).catch(() => {
-    alert('Network error. Please check your connection or call us at 9060880998.');
+  }).catch(err => {
+    btn.disabled = false;
+    btn.textContent = '✅ Confirm Order';
+    console.error('Order error:', err);
+    alert('⚠️ Could not send order. Please check your internet and try again.\n\nOr call/WhatsApp: 9060880998');
   });
 }
 
